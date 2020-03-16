@@ -5,25 +5,31 @@ void init_remote() {
   attachInterrupt(digitalPinToInterrupt(IN_CH_2), pulse2, CHANGE);
   attachInterrupt(digitalPinToInterrupt(IN_CH_3), pulse3, CHANGE);
   attachInterrupt(digitalPinToInterrupt(IN_CH_4), pulse4, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(IN_CH_5), pulse5, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(IN_CH_6), pulse6, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(IN_CH_7), pulse7, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(IN_CH_8), pulse8, CHANGE);
+  //  attachInterrupt(digitalPinToInterrupt(IN_CH_5), pulse5, CHANGE);
+  //  attachInterrupt(digitalPinToInterrupt(IN_CH_6), pulse6, CHANGE);
+  //  attachInterrupt(digitalPinToInterrupt(IN_CH_7), pulse7, CHANGE);
+  //  attachInterrupt(digitalPinToInterrupt(IN_CH_8), pulse8, CHANGE);
 }
 
 void calculateReceiver(int idx) {
   if (digitalRead(RECEIVER_PIN[idx]) == HIGH) {
     time_ch[idx] = micros();
   } else {
-//    int aa = movAvg(idx, (int)(micros() - time_ch[idx]));
-    val_receiver[idx] = (int)(micros() - time_ch[idx]);
-//    val_receiver[idx] = aa;
+    //    int aa = movAvg(idx, (int)(micros() - time_ch[idx]));
+    long t_now = micros() - time_ch[idx];
+    if (abs(t_now - last_time_ch[idx]) > 30){
+      last_time_ch[idx] = t_now;  
+      return;
+    }
+    val_receiver[idx] = (int)t_now;
+    
+    //    val_receiver[idx] = aa;
   }
 }
 
 void show_value() {
 
-  for (int x = 0; x <= 7 ; x++) {
+  for (int x = 0; x <= 3 ; x++) {
     Serial.print(val_receiver[x]); Serial.print("\t");
   }
   Serial.print(new_pwm); Serial.print("\t");

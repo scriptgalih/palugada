@@ -109,12 +109,25 @@ void calculateMPU6050() {
     gyroXangle = kalAngleX;
   if (gyroYangle < -180 || gyroYangle > 180)
     gyroYangle = kalAngleY;
-//  Serial.print(compAngleX); Serial.print("\t");
-//  Serial.print(compAngleY); Serial.print("\t");
+  //  Serial.print(compAngleX); Serial.print("\t");
+  //  Serial.print(compAngleY); Serial.print("\t");
   //  e = 0 - compAngleX;
 
-  inPitch = movAvg(0, compAngleX);
-  inRoll = movAvg(1, compAngleY);
+  //  inPitch = movAvg(0, compAngleX);
+  //  inRoll = movAvg(1, compAngleY);
+  inPitch  = alpha_filter * compAngleX + (1 - alpha_filter) * previous_output_pitch;
+  previous_output_pitch = inPitch;
+
+  inRoll  = alpha_filter * compAngleY + (1 - alpha_filter) * previous_output_roll;
+  previous_output_roll = inRoll;
+  Serial3.print(compAngleY); Serial3.print("\t");
+  Serial3.print(inRoll); Serial3.print("\t");
+  Serial3.println();
+  current_output_throttle  = alpha_filter_remote * val_receiver[2] + (1 - alpha_filter_remote) * previous_output_throttle;
+  previous_output_throttle = current_output_throttle;
+  //  Serial.print(current_output_throttle); Serial.print("\t");
+  //  Serial.print(val_receiver[2]); Serial.print("\t");
+  //  Serial.println();
   //  Serial.print(val_receiver[2]);
-//  Serial.print("\r\n");
+  //  Serial.print("\r\n");
 }

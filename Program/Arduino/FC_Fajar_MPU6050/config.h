@@ -1,28 +1,29 @@
 /*
 Definisi port palugada FC
 */
-#define LED1 35
-#define LED2 34
-#define LED3 33
-#define BUZZER 29
+#define LED1 22
+#define LED2 23
+#define LED3 24
+#define LED4 25
+#define BUZZER 17
 
-#define IN_CH_1 20
-#define IN_CH_2 19
-#define IN_CH_3 18
-#define IN_CH_4 17
-#define IN_CH_5 16
-#define IN_CH_6 15
-#define IN_CH_7 14
-#define IN_CH_8 13
+#define IN_CH_1 16
+#define IN_CH_2 15
+#define IN_CH_3 14
+#define IN_CH_4 13
+#define IN_CH_5 39
+#define IN_CH_6 38
+#define IN_CH_7 37
+#define IN_CH_8 36
 
-#define OUT_1 39
-#define OUT_2 38
-#define OUT_3 37
-#define OUT_4 36
+#define OUT_1 23
+#define OUT_2 22
+#define OUT_3 21
+#define OUT_4 20
 #define OUT_5 35
 #define OUT_6 34
 
-#define ADC_BAT 36
+#define ADC_BAT 3536
 
 #define SCL0 19
 #define SDA0 18
